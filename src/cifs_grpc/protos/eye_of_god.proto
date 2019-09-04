@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.IFS_SourceData";
+option java_outer_classname = "eyeIfsProto";
+option objc_class_prefix = "IFSGRPC";
+
+package eye_grpc;
+
+service IFS_SourceData {
+  rpc Add(SourceData) returns (AddResponse) {}
+  rpc ImgFeature(Source_image) returns (FeatureResponse) {}
+ }
+
+message SourceData {
+    int32  source_type=1;
+    string source_name=2;
+    string uuid=3;
+    int32  gpu_id=4;
+    int32  valid=5;
+    string rule=6;
+}
+
+message AddResponse {
+    int32  results = 1;
+    int32  gpu_id=2;
+    int32  valid=3;
+}
+
+
+message Source_image {
+    string file_name=1;
+    int32  feature_type=2;
+    int32  gpu_id=3;
+    string rule=4;
+}
+
+message FeatureResponse {
+    string file_name=1;
+    int32  results = 2;
+    int32  gpu_id=3;
+    string feature=4;
+}
